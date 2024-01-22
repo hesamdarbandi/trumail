@@ -68,7 +68,7 @@ func mailDialTimeout(domain string, timeout time.Duration) (*smtp.Client, error)
 
 	// Attempt to connect to all SMTP servers concurrently
 	for _, record := range records {
-		addr := record.Host + ":25"
+		addr := record.Host + ":465"
 		go func() {
 			c, err := smtpDialTimeout(addr, timeout)
 			if err != nil {

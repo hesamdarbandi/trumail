@@ -6,6 +6,7 @@ import (
 	"math/rand"
 	"net"
 	"net/smtp"
+	"strings"
 	"time"
 
 	"golang.org/x/net/idna"
@@ -68,6 +69,11 @@ func mailDialTimeout(domain string, timeout time.Duration) (*smtp.Client, error)
 
 	// Attempt to connect to all SMTP servers concurrently
 	for _, record := range records {
+
+		if strings.Contains(record.Host, "alt3.gmail-smtp-in.l.google.com") {
+			record.Host = "smtp.gmail.com"
+		}
+
 		addr := record.Host + ":465"
 		go func() {
 			c, err := smtpDialTimeout(addr, timeout)

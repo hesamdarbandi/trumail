@@ -136,7 +136,7 @@ func smtpDialTimeout(addr string, timeout time.Duration) (*smtp.Client, error) {
 			return nil, errors.New("Unexpected response dialing SMTP server")
 		}
 	case <-time.After(timeout):
-		return nil, errors.New("Timeout connecting to mail-exchanger")
+		return nil, errors.New(fmt.Sprintf("Timeout connecting to mail-exchanger , adress is %s", addr))
 	}
 }
 
